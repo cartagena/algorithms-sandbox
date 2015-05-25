@@ -19,7 +19,7 @@ public class ListTest {
     public void testReserve() {
         List list = buildList("a", "b", "c", "d", "e");
         
-        list.reserve();
+        list.reverse();
 
         Assert.assertEquals(5, list.size());
         Assert.assertEquals("e", list.get(0));
@@ -33,7 +33,7 @@ public class ListTest {
     public void testReserveRecursive() {
         List list = buildList("a", "b", "c", "d", "e");
         
-        list.reserveRecursive();
+        list.reverseRecursive();
         
         Assert.assertEquals(5, list.size());
         Assert.assertEquals("e", list.get(0));

@@ -64,7 +64,7 @@ public class MySinglyList implements List {
     }    
     
     @Override
-    public void reserve() {
+    public void reverse() {
         Node newTail = this.head;
         Node newHead = this.tail;
         
@@ -85,7 +85,7 @@ public class MySinglyList implements List {
     }
 
     @Override
-    public void reserveRecursive() {
+    public void reverseRecursive() {
         Node newTail = this.head;
         reserve(this.head);
         

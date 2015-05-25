@@ -4,9 +4,9 @@ public interface List extends Iterable<Object> {
 
     void add(Object data);
     
-    void reserve();
+    void reverse();
 
-    void reserveRecursive();
+    void reverseRecursive();
     
     int size();
 
