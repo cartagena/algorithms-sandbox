@@ -124,6 +124,8 @@ public class MySinglyList implements List {
         } else {
             previous.setNext(next);
         }
+        
+        size--;
     }
     
     @Override

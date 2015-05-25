@@ -1,8 +1,9 @@
 package list;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.Iterator;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 public class ListTest {
@@ -11,8 +12,13 @@ public class ListTest {
     public void testAdd() {
         List list = buildList("a", "b", "c");
 
-        Assert.assertEquals(3, list.size());
-        Assert.assertEquals("b", list.get(1));
+        int listSize = list.size();
+        assertThat(listSize)
+            .isEqualTo(3);
+        
+        Object secondElement = list.get(1);
+        assertThat(secondElement)
+           .isEqualTo("b");
     }
 
     @Test
@@ -21,12 +27,8 @@ public class ListTest {
         
         list.reverse();
 
-        Assert.assertEquals(5, list.size());
-        Assert.assertEquals("e", list.get(0));
-        Assert.assertEquals("d", list.get(1));
-        Assert.assertEquals("c", list.get(2));
-        Assert.assertEquals("b", list.get(3));
-        Assert.assertEquals("a", list.get(4));
+        assertThat(list)
+            .containsExactly("e", "d", "c", "b", "a");
     }
     
     @Test
@@ -34,25 +36,19 @@ public class ListTest {
         List list = buildList("a", "b", "c", "d", "e");
         
         list.reverseRecursive();
-        
-        Assert.assertEquals(5, list.size());
-        Assert.assertEquals("e", list.get(0));
-        Assert.assertEquals("d", list.get(1));
-        Assert.assertEquals("c", list.get(2));
-        Assert.assertEquals("b", list.get(3));
-        Assert.assertEquals("a", list.get(4));
+
+        assertThat(list)
+            .containsExactly("e", "d", "c", "b", "a");
     }
     
     @Test
     public void testIterator() {
         List list = buildList("a", "b", "c", "d", "e");
         
-        StringBuilder sb = new StringBuilder();
-        for(Object o : list) {
-            sb.append(o);
-        }
+        Iterator<Object> it = list.iterator();
         
-        Assert.assertEquals("abcde", sb.toString());
+        assertThat(it)
+            .containsExactly("a", "b", "c", "d", "e");
     }
     
     @Test
@@ -68,7 +64,26 @@ public class ListTest {
             }
         }
         
-        Assert.assertEquals("[a,b,d,e]", list.toString());
+        int listSize = list.size();
+        
+        assertThat(listSize)
+            .isEqualTo(4);
+        
+        assertThat(list)
+            .containsExactly("a", "b", "d", "e");
+    }
+    
+    @Test
+    public void testInvalidPosition() {
+        List list = buildList("a");
+        
+        try {
+            list.get(1);
+        } catch (IndexOutOfBoundsException e) {
+            assertThat(e)
+                .hasNoCause()
+                .hasMessage(null);
+        }
     }
     
     private List buildList(String... entriues) {
