@@ -90,7 +90,6 @@ public class MySinglyList implements List {
         reserve(this.head);
         
         this.tail = newTail;
-        this.tail.setNext(null);
     }
     
     private void reserve(Node node) {
