@@ -72,6 +72,62 @@ public class ListTest {
         assertThat(list)
             .containsExactly("a", "b", "d", "e");
     }
+
+    @Test
+    public void testIteratorRemoveFirst() {
+        List list = buildList("a", "b", "c");
+        
+        Iterator<Object> it = list.iterator();
+
+        it.next();
+        it.remove();
+        
+        int listSize = list.size();
+        
+        assertThat(listSize)
+            .isEqualTo(2);
+        
+        assertThat(list)
+            .containsExactly("b", "c");
+    }
+
+    
+    @Test
+    public void testIteratorRemoveInvalid() {
+        List list = buildList("a", "b", "c", "d", "e");
+        
+        Iterator<Object> it = list.iterator();
+
+        try {
+            it.remove();
+        } catch (Exception e) {
+            assertThat(e)
+                .isInstanceOf(IllegalStateException.class)
+                .hasNoCause()
+                .hasMessage(null);
+        }
+    }
+    
+    
+    @Test
+    public void testIteratorRemoveLast() {
+        List list = buildList("d", "e", "f");
+        
+        Iterator<Object> it = list.iterator();
+
+        it.next();
+        it.next();
+        it.next();
+        it.remove();
+        
+        int listSize = list.size();
+        
+        assertThat(listSize)
+            .isEqualTo(2);
+        
+        assertThat(list)
+            .containsExactly("d", "e");
+    }
     
     @Test
     public void testInvalidPosition() {
@@ -79,8 +135,9 @@ public class ListTest {
         
         try {
             list.get(1);
-        } catch (IndexOutOfBoundsException e) {
+        } catch (Exception e) {
             assertThat(e)
+                .isInstanceOf(IndexOutOfBoundsException.class)
                 .hasNoCause()
                 .hasMessage(null);
         }

@@ -119,7 +119,7 @@ public class MySinglyList implements List {
         if(previous == null) {
             this.head = next;
         } else if(next == null){
-            this.tail = current;
+            this.tail = previous;
             this.tail.setNext(null);
         } else {
             previous.setNext(next);
